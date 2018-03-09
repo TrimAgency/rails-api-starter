@@ -14,7 +14,6 @@ gem 'rack-cors'
 gem 'active_model_serializers'
 gem 'jwt'
 gem 'knock'
-gem 'seedbank'
 gem 'figaro'
 
 group :development, :test do
@@ -41,8 +40,7 @@ end
 
 group :test do
   gem 'simplecov', require: false
-  gem 'factory_girl_rails'
-  gem 'database_cleaner'
+  gem 'factory_bot_rails'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
