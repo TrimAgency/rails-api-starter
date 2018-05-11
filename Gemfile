@@ -41,7 +41,7 @@ end
 
 group :test do
   gem 'simplecov', require: false
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'json_matchers'
   gem 'rspec'
   gem 'rspec-json_expectations'
