@@ -15,6 +15,7 @@ gem 'active_model_serializers'
 gem 'jwt'
 gem 'knock'
 gem 'figaro'
+gem 'mandrill-api'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -40,7 +41,12 @@ end
 
 group :test do
   gem 'simplecov', require: false
-  gem 'factory_bot_rails'
+  gem 'factory_girl_rails'
+  gem 'json_matchers'
+  gem 'rspec'
+  gem 'rspec-json_expectations'
+  gem 'webmock'
+  gem 'shoulda-matchers'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
