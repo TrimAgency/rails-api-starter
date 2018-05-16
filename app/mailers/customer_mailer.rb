@@ -1,5 +1,5 @@
 class ConsumerMailer < BaseMandrillMailer
-  default from: 'no_reply@vibiio.com'
+  default from: 'no_reply@trimagency.com'
   layout 'mailer'
 
   def password_reset(user_id, jwt)
