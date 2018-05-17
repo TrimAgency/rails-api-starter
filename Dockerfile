@@ -16,7 +16,7 @@ WORKDIR /app
 
 #RUN gem install rails --version 5.1.5
 COPY Gemfile Gemfile.lock ./
-RUN gem install bundler && bundle install --jobs 20 --retry 5
+RUN bundle update && gem install bundler && bundle install --jobs 20 --retry 5
 
 COPY . ./
 
