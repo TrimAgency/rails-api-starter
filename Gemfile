@@ -47,7 +47,6 @@ group :test do
   gem 'rspec'
   gem 'rspec-json_expectations'
   gem 'webmock'
-  gem 'shoulda-matchers'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
