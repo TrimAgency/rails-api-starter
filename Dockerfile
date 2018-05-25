@@ -1,4 +1,4 @@
-FROM ruby:2.5.0
+FROM ruby:2.5.1
 MAINTAINER stevetwitte@gmail.com
 
 RUN apt-get update && apt-get install -y \
