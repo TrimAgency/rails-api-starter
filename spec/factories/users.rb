@@ -1,7 +1,8 @@
-FactoryGirl.define do
+FactoryBot.define do
  factory :user do
    email { Faker::Internet.safe_email }
-   password "password"
-   password_confirmation "password"
+   password 'password'
+   password_confirmation 'password'
+   profile { build :consumer }
  end
 end

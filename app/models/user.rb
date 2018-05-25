@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_secure_password
 
+  belongs_to :profile, polymorphic: true, dependent: :destroy
+
   validates :email,
             uniqueness: { case_sensitive: false },
             presence: true,
