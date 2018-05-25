@@ -31,7 +31,6 @@ group :development, :test do
   gem 'pry-rescue'
   gem 'pry-stack_explorer'
   gem 'pry-rails'
-  gem 'shoulda-matchers'
 end
 
 group :development do
