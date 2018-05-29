@@ -26,7 +26,7 @@ class UserRegistrationForm
             presence: true,
             inclusion: { in: ['consumer'] }
 
-  validates :profile_has_all_fields
+  validate :profile_has_all_fields
 
   def save!
     raise ActiveRecord::RecordInvalid.new self unless valid?
@@ -40,7 +40,7 @@ class UserRegistrationForm
   private
 
   def create_profile!
-    case @profile_type
+    case @profile_type.downcase
     when 'consumer'
       create_consumer_profile!
     end

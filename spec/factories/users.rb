@@ -3,6 +3,10 @@ FactoryBot.define do
    email { Faker::Internet.safe_email }
    password 'password'
    password_confirmation 'password'
-   profile { build :consumer }
+   association :profile, factory: :consumer
+
+   trait :consumer_user do
+     association :profile, factory: :consumer
+   end
  end
 end

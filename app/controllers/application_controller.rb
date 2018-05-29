@@ -19,6 +19,7 @@ class ApplicationController < ActionController::API
   def render_general_error(status:, message:)
     render(json: { errors: [message] },
            status: status)
+  end
 
   def not_authorized
     render json: { error: ['unauthorized'] }, status: 401
