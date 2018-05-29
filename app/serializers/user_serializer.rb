@@ -1,7 +1,8 @@
 class UserSerializer < ActiveModel::Serializer
   attributes :id,
              :email,
-             :profile
+             :profile,
+             :profile_type
 
   def profile
     profile_serializer.new(object.profile)
