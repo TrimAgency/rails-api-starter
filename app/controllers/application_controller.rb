@@ -5,6 +5,7 @@ class ApplicationController < ActionController::API
 
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
   rescue_from ActiveRecord::RecordInvalid, with: :render_record_invalid
+  rescue_from CanCan::AccessDenied, with: :not_authorized
 
   def render_record_invalid(exception)
     render(json: { errors: exception.record.errors },
@@ -14,6 +15,11 @@ class ApplicationController < ActionController::API
   def render_not_found
     render(json: { errors: [I18n.t(:detail, scope: 'errors.not_found')] },
            status: :not_found)
+  end
+
+  def render_general_error(status:, message:)
+    render(json: { errors: [message] },
+           status: status)
   end
 
   def not_authorized
