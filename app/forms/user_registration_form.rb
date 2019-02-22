@@ -40,7 +40,7 @@ class UserRegistrationForm
   private
 
   def create_profile!
-    case @profile_type.downcase
+    case profile_type.downcase
     when 'consumer'
       create_consumer_profile!
     end
@@ -60,11 +60,11 @@ class UserRegistrationForm
   end
 
   def profile_has_all_fields
-    if @profile[:first_name].blank?
+    if profile[:first_name].blank?
       errors.add(:first_name, "can't be blank")
     end
 
-    if @profile[:last_name].blank?
+    if profile[:last_name].blank?
       errors.add(:last_name, "can't be blank")
     end
   end
