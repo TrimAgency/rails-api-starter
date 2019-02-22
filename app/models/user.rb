@@ -32,7 +32,7 @@ class User < ApplicationRecord
     Ability.new(self)
   end
 
-  # Authorization example - Remove for new projects
+  # NOTE: Authorization example - Remove for new projects
   # @post = Post.new(user_id: user_id,
   #                  title: title,
   #                  category: category,

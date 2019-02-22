@@ -25,7 +25,7 @@ of your choice by appending the folder name to your git clone command.
 
 - Change the app name and other references from TRIM Starter to the new app name
 
-- Update this README with the Asana URL
+- Update this README with the Asana URL. Remove setup notes marked with `NOTE:` in project.
 
 ## Development
 
