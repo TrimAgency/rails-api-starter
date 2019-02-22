@@ -34,6 +34,8 @@ group :development, :test do
   gem 'pry-rescue'
   gem 'pry-stack_explorer'
   gem 'pry-rails'
+  # Create an erd pdf for reference
+  gem 'rails-erd'
   gem 'rspec-rails'
 end
 
