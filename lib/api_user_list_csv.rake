@@ -2,6 +2,7 @@
 # rake api_user_list_csv:run
 #
 # api_user_data_DATETIME.csv will be saved in public/user_data folder
+# See README for instructions on how to run rake task and obtain this file
 namespace :api_user_list_csv do
   desc 'Creates a list of the current user data and saves it to a csv'
   task run: :environment do
