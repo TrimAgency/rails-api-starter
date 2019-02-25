@@ -26,4 +26,18 @@ class User < ApplicationRecord
   def consumer?
     profile_type == 'Consumer'
   end
+
+  # Use user.ability.can? to run authorization checks in forms
+  def ability
+    Ability.new(self)
+  end
+
+  # NOTE: Authorization example - Remove for new projects
+  # @post = Post.new(user_id: user_id,
+  #                  title: title,
+  #                  category: category,
+  #                  body: body)
+
+  # raise CanCan::AccessDenied unless @user.ability.can? :create, @post
+  # @post.save!
 end

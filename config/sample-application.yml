@@ -1,36 +1,44 @@
-
-# General
-CLIENT_ORIGIN: "*"
-ALLOWED_ORIGIN: "*"
-TRIM_STARTER_DATABASE_PASSWORD:
-
+# File storage
 # AWS (fog-aws)
-AWS_KEY: 
-AWS_SECRET: 
-AWS_BUCKET: 
-AWS_REGION: "us-east-1"
-AWS_HOST_NAME: "s3.amazonaws.com"
+# AWS_KEY: 
+# AWS_REGION: "us-east-1"
+# AWS_SECRET: 
 
 # Mandrill
-SMTP_PASSWORD:
-EMAIL_ORIGN:
+SMTP_ADDRESS: "smtp.mandrillapp.com"
+SMTP_DOMAIN: "localhost"
+SMTP_PASSWORD: 
+SMTP_USERNAME: 
 
-# Optional
-RAILS_SERVE_STATIC_FILES:
-RAILS_MASTER_KEY:
-BUNDLE_GEMFILE:
-
-# Redis
-  REDISCLOUD_URL:
+test:
+  CLIENT_ORIGIN: "http://localhost:4200"
+  EMAIL_ORIGIN: "http://localhost:4200"
+  REDIS_URL: "redis://redis:6379"
+  # STRIPE_PUBLISHABLE_KEY:
+  # STRIPE_SECRET_KEY:
 
 development:
- secret_key_base: dfc0e2b301652bc5951f7a2923266d7cb2b15556ebb42d5d682276d50b27bd53246bd75c201637f8bee40a71ac43dc90e4421174e7cd7efe334efe7c1a4c2d12
+  # AWS_BUCKET: 
+  CLIENT_ORIGIN: "http://localhost:4200"
+  EMAIL_ORIGIN: "http://localhost:4200"
+  # Enable logging in development
+  RAILS_LOG_TO_STDOUT: "enabled"
+  REDIS_URL: "redis://redis:6379"
+  # STRIPE_PUBLISHABLE_KEY:
+  # STRIPE_SECRET_KEY:
 
-test: 
- secret_key_base: 890622dc39980efcee6ac01180117bf2505704f5c4458924a449a0aa16661d53488e9d9c1e2e8ee52a31180b4472c34312929430b7c417811c378d569da5054b
-staging:
-  secret_key_base: <%= ENV["SECRET_KEY_BASE"] %>
+# staging:
+#   AWS_BUCKET: 
+#   CLIENT_ORIGIN:
+#   EMAIL_ORIGIN:
+#   STRIPE_PUBLISHABLE_KEY:
+#   STRIPE_SECRET_KEY:
 
-production:
-  secret_key_base: <%= ENV["SECRET_KEY_BASE"] %>
+# production:
+#   AWS_BUCKET:
+#   CLIENT_ORIGIN:
+#   EMAIL_ORIGIN: 
+#   STRIPE_PUBLISHABLE_KEY:
+#   STRIPE_SECRET_KEY:
+
 

@@ -59,46 +59,40 @@ RSpec.describe UsersController, type: :request do
   describe 'post #create' do
     context 'as a consumer' do
       let(:valid_params) do
-        {
-            user: {
-                email: Faker::Internet.email,
-                password: '123123123',
-                password_confirmation: '123123123',
-                profile_type: 'consumer',
-                profile: {
-                    first_name: Faker::Name.first_name,
-                    last_name: Faker::Name.last_name
-                }
-            }
+        { 
+          email: Faker::Internet.email,
+          password: '123123123',
+          password_confirmation: '123123123',
+          profile_type: 'consumer',
+          profile: {
+              first_name: Faker::Name.first_name,
+              last_name: Faker::Name.last_name
+          }
         }
       end
 
       let(:missing_params) do
         {
-            user: {
-                email: Faker::Internet.email,
-                password: '123123123',
-                password_confirmation: '123123123',
-                profile_type: 'consumer',
-                profile: {
-                    last_name: Faker::Name.last_name
-                }
-            }
+          email: Faker::Internet.email,
+          password: '123123123',
+          password_confirmation: '123123123',
+          profile_type: 'consumer',
+          profile: {
+              last_name: Faker::Name.last_name
+          }
         }
       end
 
       let(:invalid_params) do
         {
-            user: {
-                email: 'not@good',
-                password: '123123123',
-                password_confirmation: '123123123',
-                profile_type: 'consumer',
-                profile: {
-                    first_name: Faker::Name.first_name,
-                    last_name: Faker::Name.last_name
-                }
-            }
+          email: 'not@good',
+          password: '123123123',
+          password_confirmation: '123123123',
+          profile_type: 'consumer',
+          profile: {
+              first_name: Faker::Name.first_name,
+              last_name: Faker::Name.last_name
+          }
         }
       end
 
@@ -115,7 +109,7 @@ RSpec.describe UsersController, type: :request do
         end
 
         it 'successfully creates a user' do
-          expect(User.last.email).to eql valid_params[:user][:email]
+          expect(User.last.email).to eql valid_params[:email]
         end
 
         it 'returns expected attributes in valid JSON' do
@@ -143,16 +137,14 @@ RSpec.describe UsersController, type: :request do
       context 'with email that is taken' do
         let(:taken_params) do
           {
-              user: {
-                  email: 'test@test.com',
-                  password: '123123123',
-                  password_confirmation: '123123123',
-                  profile_type: 'consumer',
-                  profile: {
-                      first_name: Faker::Name.first_name,
-                      last_name: Faker::Name.last_name
-                  }
-              }
+            email: 'test@test.com',
+            password: '123123123',
+            password_confirmation: '123123123',
+            profile_type: 'consumer',
+            profile: {
+                first_name: Faker::Name.first_name,
+                last_name: Faker::Name.last_name
+            }
           }
         end
 
@@ -200,10 +192,8 @@ RSpec.describe UsersController, type: :request do
       let!(:user_two) { create(:user, :consumer_user) }
 
       let(:update_params) do
-        {
-            user: {
-                email: 'newemail@test.com'
-            }
+        { 
+          email: 'newemail@test.com' 
         }
       end
 
