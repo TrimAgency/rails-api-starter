@@ -12,8 +12,8 @@ class ApplicationController < ActionController::API
            status: :bad_request)
   end
 
-  def render_not_found
-    render(json: { errors: [I18n.t(:detail, scope: 'errors.not_found')] },
+  def render_not_found(exception)
+    render(json: { errors: exception.message },
            status: :not_found)
   end
 
