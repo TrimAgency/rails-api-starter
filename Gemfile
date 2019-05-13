@@ -8,6 +8,7 @@ end
 
 gem 'active_model_serializers'
 gem 'bcrypt'
+gem 'blueprinter', '~> 0.16.0'
 gem 'cancancan'
 gem 'carrierwave'
 gem 'carrierwave-base64'

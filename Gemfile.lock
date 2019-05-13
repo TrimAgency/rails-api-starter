@@ -50,6 +50,7 @@ GEM
     bcrypt (3.1.12)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
+    blueprinter (0.16.0)
     builder (3.2.3)
     byebug (10.0.2)
     cancancan (2.2.0)
@@ -293,6 +294,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   bcrypt
+  blueprinter (~> 0.16.0)
   byebug
   cancancan
   carrierwave
