@@ -22,6 +22,8 @@ gem 'puma', '~> 3.7'
 gem 'rack-cors'
 gem 'rails', '~> 5.1.5'
 gem 'sidekiq'
+gem 'rswag-api'
+gem 'rswag-ui'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -54,6 +56,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
   gem 'webmock'
+  gem 'rswag-specs'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
