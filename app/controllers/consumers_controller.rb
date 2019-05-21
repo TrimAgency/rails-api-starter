@@ -1,12 +1,12 @@
 class ConsumersController < ApplicationController
+  CONSUMER_ROOT = 'consumer'.freeze
   load_and_authorize_resource
 
   def update
     @consumer.update!(update_params)
 
-    render json: {
-        consumer: ConsumerSerializer.new(@consumer)
-    }, status: :ok
+    render json: ConsumerSerializer.render(@consumer, root: CONSUMER_ROOT), 
+           status: :ok
   end
 
   private

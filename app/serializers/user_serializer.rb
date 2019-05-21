@@ -1,18 +1,6 @@
-class UserSerializer < ActiveModel::Serializer
-  attributes :id,
-             :email,
-             :profile,
-             :profile_type
+class UserSerializer < ApplicationSerializer
+  identifier :id
 
-  def profile
-    profile_serializer.new(object.profile)
-  end
-
-  def profile_serializer
-    ("#{object.profile_type}Serializer").constantize
-  end
-
-  def full_name
-    "#{object.first_name} #{object.last_name}"
-  end
+  fields :email, :profile_type
+  association :profile, blueprint: ->(profile) { profile.serializer }
 end

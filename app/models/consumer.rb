@@ -6,4 +6,8 @@ class Consumer < ApplicationRecord
 
   validates :last_name,
             presence: true
+
+  def serializer
+    ConsumerSerializer
+  end
 end

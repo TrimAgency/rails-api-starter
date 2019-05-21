@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
+  USER_ROOT= 'user'.freeze
   load_and_authorize_resource except: :create
   skip_before_action :authenticate_user, only: :create
 
   def show
-    render json: {
-        user: UserSerializer.new(@user)
-    }, status: :ok
+    render json: UserSerializer.render(@user, root: USER_ROOT), 
+           status: :ok
   end
 
   def create
@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     registration.save!
 
     render json: {
-        user: UserSerializer.new(registration.user),
+        user: UserSerializer.render_as_hash(registration.user),
         token: registration.user.generate_token
     }, status: :created
   end
@@ -21,9 +21,8 @@ class UsersController < ApplicationController
   def update
     @user.update!(update_params)
 
-    render json: {
-        user: UserSerializer.new(@user)
-    }, status: :ok
+    render json: UserSerializer.render(@user, root: USER_ROOT), 
+           status: :ok
   end
 
   private
