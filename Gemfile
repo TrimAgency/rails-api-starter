@@ -6,7 +6,6 @@ git_source(:github) do |repo_name|
 end
 
 
-gem 'active_model_serializers'
 gem 'bcrypt'
 gem 'blueprinter', '~> 0.16.0'
 gem 'cancancan'
