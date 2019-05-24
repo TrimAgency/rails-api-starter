@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.3.0] - 2019-05-21
 ### Added
-- Sample data for developement
+- Sample data for development
 - Serializes data with Blueprinter instead of Active Model Serializer
 
 ## [0.2.0] - 2019-02-21
