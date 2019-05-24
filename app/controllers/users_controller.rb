@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   skip_before_action :authenticate_user, only: :create
 
   def show
-    render json: UserSerializer.render(@user, root: USER_ROOT), 
+    render json: UserSerializer.render(@user, root: USER_ROOT, view: :show), 
            status: :ok
   end
 
