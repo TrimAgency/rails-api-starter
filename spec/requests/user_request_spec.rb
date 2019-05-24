@@ -22,7 +22,7 @@ RSpec.describe UsersController, type: :request do
           end
 
           it 'returns expected attributes in valid JSON' do
-            expect(response.body).to eql({ user: UserSerializer.new(user_one).attributes }.to_json)
+            expect(response.body).to eql({ user: UserSerializer.render_as_hash(user_one) }.to_json)
           end
         end
 
@@ -113,7 +113,7 @@ RSpec.describe UsersController, type: :request do
         end
 
         it 'returns expected attributes in valid JSON' do
-          expect(response.body).to include UserSerializer.new(User.last).attributes.to_json
+          expect(response.body).to include UserSerializer.render_as_hash(User.last).to_json
         end
       end
 
@@ -215,7 +215,7 @@ RSpec.describe UsersController, type: :request do
           end
 
           it 'returns expected attributes in valid JSON' do
-            expect(response.body).to eql({ user: UserSerializer.new(User.find(user_one.id)).attributes }.to_json)
+            expect(response.body).to eql({ user: UserSerializer.render_as_hash(User.find(user_one.id)) }.to_json)
           end
         end
       end
