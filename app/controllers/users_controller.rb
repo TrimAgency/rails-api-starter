@@ -11,17 +11,15 @@ class UsersController < ApplicationController
   def create
     registration = UserRegistrationForm.new(create_params)
     registration.save!
+    @user = registration.user
 
-    render json: {
-        user: UserSerializer.render_as_hash(registration.user),
-        token: registration.user.generate_token
-    }, status: :created
+    render_created_user
   end
 
   def update
     @user.update!(update_params)
 
-    render json: UserSerializer.render(@user, root: USER_ROOT), 
+    render json: UserSerializer.render(@user, root: USER_ROOT, view: :update), 
            status: :ok
   end
 
@@ -38,5 +36,14 @@ class UsersController < ApplicationController
 
   def update_params
     params.permit(:email, :password, :password_confirmation)
+  end
+
+  def render_created_user
+    render json: UserSerializer.render(
+      @user, 
+      root: USER_ROOT, 
+      view: :create, 
+      token: @user.generate_token
+    ), status: :created
   end
 end
