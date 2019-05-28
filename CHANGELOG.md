@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 <!-- Note: Every project begins on version 0.1.0. Clear out the log below and start anew. Remove this message once completed. -->
 
+## [0.3.0] - 2019-05-21
+### Added
+- Sample data for development
+- Serializes data with Blueprinter instead of Active Model Serializer
+
 ## [0.2.0] - 2019-02-21
 ### Added
 - Shows Rails logs in development using docker

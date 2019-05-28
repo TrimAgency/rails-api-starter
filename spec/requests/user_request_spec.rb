@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe UsersController, type: :request do
   include AuthHelper
+  USER_ROOT= 'user'.freeze
 
   describe 'get #show' do
     context 'as a consumer' do
@@ -22,7 +23,7 @@ RSpec.describe UsersController, type: :request do
           end
 
           it 'returns expected attributes in valid JSON' do
-            expect(response.body).to eql({ user: UserSerializer.new(user_one).attributes }.to_json)
+            expect(response.body).to eql(UserSerializer.render(user_one, root: USER_ROOT, view: :show))
           end
         end
 
@@ -113,9 +114,13 @@ RSpec.describe UsersController, type: :request do
         end
 
         it 'returns expected attributes in valid JSON' do
-          expect(response.body).to include UserSerializer.new(User.last).attributes.to_json
+          token = JSON.parse(response.body)['user']['token']
+          expect(response.body).to include UserSerializer.render(User.last, 
+                                                                 root: USER_ROOT,
+                                                                 view: :create, 
+                                                                 token: token)
         end
-      end
+      end                                     
 
       context 'with missing user data' do
         before do
@@ -215,7 +220,8 @@ RSpec.describe UsersController, type: :request do
           end
 
           it 'returns expected attributes in valid JSON' do
-            expect(response.body).to eql({ user: UserSerializer.new(User.find(user_one.id)).attributes }.to_json)
+            user = User.find(user_one.id)
+            expect(response.body).to eql(UserSerializer.render(user, root: USER_ROOT, view: :update))
           end
         end
       end
