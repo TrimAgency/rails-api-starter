@@ -20,7 +20,7 @@ gem 'mini_magick'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.7'
 gem 'rack-cors'
-gem 'rails', '~> 5.1.5'
+gem 'rails', '~> 5.2'
 gem 'sidekiq'
 
 group :development, :test do
