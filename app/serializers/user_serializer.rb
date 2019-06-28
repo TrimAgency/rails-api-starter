@@ -1,18 +1,21 @@
-class UserSerializer < ActiveModel::Serializer
-  attributes :id,
-             :email,
-             :profile,
-             :profile_type
+class UserSerializer < ApplicationSerializer
+  identifier :id
 
-  def profile
-    profile_serializer.new(object.profile)
+  view :show do
+    fields :email, :profile_type
+    association :profile, blueprint: ->(profile) { profile.serializer }
   end
 
-  def profile_serializer
-    ("#{object.profile_type}Serializer").constantize
+  view :create do
+    include_view :show
+    field :token do |user, options| 
+      options[:token]
+    end
   end
 
-  def full_name
-    "#{object.first_name} #{object.last_name}"
+  # NOTE: It is the same as the show action for now, but here is a separate view for later use
+  view :update do
+    include_view :show
+    exclude :token
   end
 end

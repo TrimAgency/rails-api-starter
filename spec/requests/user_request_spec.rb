@@ -3,6 +3,7 @@ require 'swagger_helper'
 
 RSpec.describe UsersController, type: :request do
   include AuthHelper
+  USER_ROOT= 'user'.freeze
 
   describe 'Users API' do
     let!(:user_one) { create(:user, :consumer_user) }

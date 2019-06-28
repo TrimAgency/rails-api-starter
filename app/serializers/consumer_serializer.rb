@@ -1,5 +1,5 @@
-class ConsumerSerializer < ActiveModel::Serializer
-  attributes :id,
-             :first_name,
-             :last_name
+class ConsumerSerializer < ApplicationSerializer
+  identifier :id
+  
+  fields :first_name, :last_name
 end
