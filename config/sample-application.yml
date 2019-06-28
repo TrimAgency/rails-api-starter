@@ -40,5 +40,6 @@ development:
 #   EMAIL_ORIGIN: 
 #   STRIPE_PUBLISHABLE_KEY:
 #   STRIPE_SECRET_KEY:
+#   NO_SAMPLE_DATA:
 
 
