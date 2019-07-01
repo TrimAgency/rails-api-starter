@@ -37,7 +37,7 @@ $ docker-compose run app bash
 # create database and run all migrations
 $ rake db:setup 
 
-# Adds sample data (optional)
+# add sample data (optional)
 $ rake sample:all 
 ```
 
@@ -95,7 +95,7 @@ TODO: Notes about Swagger to be added here
 If you start the server and attach to the container in the same command you can automatically use `binding.pry`
 for debugging.
 
-To confirm the app container id you can used `docker ps`. You can attach separate if running docker commands
+To confirm the app container id you can used `docker ps`. You can attach separately if running docker commands
 one by one. 
 
 ```

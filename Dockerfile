@@ -1,5 +1,5 @@
 FROM ruby:2.5.1
-MAINTAINER services@trimagency.com
+LABEL maintainer=services@trimagency.com
 
 RUN apt-get update && apt-get install -y \
   build-essential \
