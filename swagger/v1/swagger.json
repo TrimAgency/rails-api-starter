@@ -7,7 +7,7 @@
   "paths": {
     "/users/{id}": {
       "get": {
-        "summary": "Retrieve a user",
+        "summary": "Retrieves a user",
         "tags": [
           "Users"
         ],
@@ -44,10 +44,21 @@
                   "type": "string"
                 }
               }
+            },
+            "examples": {
+              "application/json": {
+                "user": {
+                  "id": 56,
+                  "email": "rob_auer@example.com",
+                  "profile": {
+                    "id": 56,
+                    "first_name": "Hollis",
+                    "last_name": "Medhurst"
+                  },
+                  "profile_type": "Consumer"
+                }
+              }
             }
-          },
-          "401": {
-            "description": "unauthorized"
           }
         }
       }

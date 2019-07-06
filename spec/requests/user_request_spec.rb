@@ -9,8 +9,7 @@ RSpec.describe UsersController, type: :request do
     let!(:user_one) { create(:user, :consumer_user) }
 
     path '/users/{id}' do
-
-      get 'Retrieve a user' do
+      get 'Retrieves a user' do
         tags 'Users'
         produces 'application/json'
         security [Bearer: {}]
@@ -26,14 +25,35 @@ RSpec.describe UsersController, type: :request do
             }
 
           let(:id) { user_one.id }
-          run_test!
+
+          before do |example|
+            submit_request(example.metadata)
+          end
+
+          after do |example|
+            example.metadata[:response][:examples] = { 'application/json' => JSON.parse(response.body, symbolize_names: true) }
+          end
+
+          it 'responds with 200 OK' do |example|
+            expect(response).to have_http_status :ok
+          end
+
+          it 'returns expected attributes in valid JSON' do |example|
+            expect(response.body).to eql(UserSerializer.render(user_one, root: USER_ROOT, view: :show))
+          end
         end
 
-        response '401', 'unauthorized' do
-          let(:"Authorization") { "Bearer " }
-          let(:id) { user_one.id }
-          run_test!
-        end
+        # response '404', 'user not found' do
+        #   let(:"Authorization") { "Bearer #{token_for(user_one)}" }
+        #   let(:id) { 'invalid' }
+        #   run_test!
+        # end
+
+        # response '401', 'unauthorized' do
+        #   let(:"Authorization") { "Bearer " }
+        #   let(:id) { user_one.id }
+        #   run_test!
+        # end
       end
     end
   end
