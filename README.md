@@ -88,8 +88,17 @@ $ docker-compose run app rspec
 Alternatively, open the shell (see above) and run `rspec`.
 
 ### Documentation
+[Rwag](https://github.com/domaindrivendev/rswag) is used to generate documentation from our request specs. 
 
-TODO: Notes about Swagger to be added here
+In order to properly setup the documentation the ENV `SWAGGER_DOCUMENTATION` with the value `enabled` should be present in development or staging. Documentation should not be enabled in production.
+
+After request specs are created/updated in the required format, the documentation can be updated with:
+
+```
+$ rake rswag:specs:swaggerize
+```
+
+To avoid duplicate schemas throughout the specs, a yml file can be added in `support/definitions`. Navigate to `/api-docs` to see the documentation in development or staging.
 
 ### Debugging with Pry and Docker
 If you start the server and attach to the container in the same command you can automatically use `binding.pry`
