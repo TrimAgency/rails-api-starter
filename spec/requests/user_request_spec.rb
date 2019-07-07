@@ -4,9 +4,10 @@ require 'swagger_helper'
 # NOTE: Extra comments added here for reference
 RSpec.describe UsersController, type: :request do
   include AuthHelper
-  USER_ROOT= 'user'.freeze
+  USER_ROOT='user'.freeze
+  USER_TAG='Users'.freeze
 
-  describe 'Users API' do
+  describe 'Users API', swagger_doc: 'v1/swagger.json' do
     let!(:user_one) { create(:user, :consumer_user) }
     let!(:user_two) { create(:user, :consumer_user) }
     let!(:taken_email) { create(:user, :consumer_user, email: 'test@test.com')  }
@@ -18,7 +19,7 @@ RSpec.describe UsersController, type: :request do
 
     # Build response examples
     after(:each) do |example|
-      # Swagger only allows one example per status code, skip extra tests if needed
+      # Swagger only allows one response block per status code, skip extra tests if needed
       unless example.metadata[:skip_swagger]
         example.metadata[:response][:examples] = 
           { 'application/json' => JSON.parse(response.body, symbolize_names: true) }
@@ -28,7 +29,7 @@ RSpec.describe UsersController, type: :request do
     # SHOW
     path '/users/{id}' do
       get 'Retrieves a user' do
-        tags 'Users'
+        tags USER_TAG
         consumes 'application/json'
         produces 'application/json'
         security [ Bearer: {} ]
@@ -85,7 +86,7 @@ RSpec.describe UsersController, type: :request do
             let!(:Authorization) { non_auth_headers }
             let!(:id) { user_one.id }
   
-            it 'responds with 401 unauthorized' do
+            it 'responds with 401 unauthorized', :skip_swagger do
               expect(response).to have_http_status :unauthorized
             end
           end
@@ -96,10 +97,9 @@ RSpec.describe UsersController, type: :request do
     # CREATE
     path '/users' do
       post 'Creates a user' do
-        tags 'Users'
+        tags USER_TAG
         consumes 'application/json'
         produces 'application/json'
-        security [ Bearer: {} ]
         parameter name: :user, in: :body, schema: {
           type: :object,
           properties: {
@@ -161,7 +161,6 @@ RSpec.describe UsersController, type: :request do
         end
 
         response '201', 'User created' do
-          let!(:Authorization) { non_auth_headers }
           schema type: :object,
             properties: {
               id: { type: :integer },
@@ -195,7 +194,6 @@ RSpec.describe UsersController, type: :request do
         end
 
         response '400', 'Unable to create user' do
-          let!(:Authorization) { non_auth_headers }
           schema type: :object,
             properties: {
               id: { type: :integer },
@@ -252,7 +250,7 @@ RSpec.describe UsersController, type: :request do
     # UPDATE
     path '/users/{id}' do
       patch 'Updates a user' do
-        tags 'Users'
+        tags USER_TAG
         consumes 'application/json'
         produces 'application/json'
         security [ Bearer: {} ]

@@ -2,7 +2,6 @@ class ConsumersController < ApplicationController
   CONSUMER_ROOT = 'consumer'.freeze
   load_and_authorize_resource
 
-  # TODO: Add spec for this
   def update
     @consumer.update!(update_params)
 

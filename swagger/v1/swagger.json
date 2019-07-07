@@ -1,10 +1,128 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "API V1",
+    "title": "API Documentation for Rails Starter",
     "version": "v1"
   },
   "paths": {
+    "/consumers/{id}": {
+      "patch": {
+        "summary": "Updates a consumer",
+        "tags": [
+          "Consumers"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": {
+            }
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "consumer",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "first_name": {
+                  "type": "string"
+                },
+                "last_name": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consumer updated",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "profile": {
+                  "type": "object",
+                  "properties": {
+                    "first_name": {
+                      "type": "string"
+                    },
+                    "last_name": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/password_reset": {
+      "post": {
+        "summary": "Creates password reset",
+        "tags": [
+          "Password Resets"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": {
+            }
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "password_reset",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Password reset created"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
     "/users/{id}": {
       "get": {
         "summary": "Retrieves a user",
@@ -61,39 +179,13 @@
                   "type": "string"
                 }
               }
-            },
-            "examples": {
-              "application/json": {
-                "user": {
-                  "id": 810,
-                  "email": "carter@example.net",
-                  "profile": {
-                    "id": 816,
-                    "first_name": "Isela",
-                    "last_name": "Champlin"
-                  },
-                  "profile_type": "Consumer"
-                }
-              }
             }
           },
           "404": {
-            "description": "User not found",
-            "examples": {
-              "application/json": {
-                "errors": "Couldn't find User with 'id'=invalid"
-              }
-            }
+            "description": "User not found"
           },
           "401": {
-            "description": "Unauthorized",
-            "examples": {
-              "application/json": {
-                "error": [
-                  "unauthorized"
-                ]
-              }
-            }
+            "description": "Unauthorized"
           }
         }
       },
@@ -170,31 +262,10 @@
                   "type": "string"
                 }
               }
-            },
-            "examples": {
-              "application/json": {
-                "user": {
-                  "id": 858,
-                  "email": "newemail@test.com",
-                  "profile": {
-                    "id": 866,
-                    "first_name": "Lashay",
-                    "last_name": "Morissette"
-                  },
-                  "profile_type": "Consumer"
-                }
-              }
             }
           },
           "401": {
-            "description": "Unauthorized",
-            "examples": {
-              "application/json": {
-                "error": [
-                  "unauthorized"
-                ]
-              }
-            }
+            "description": "Unauthorized"
           }
         }
       }
@@ -210,12 +281,6 @@
         ],
         "produces": [
           "application/json"
-        ],
-        "security": [
-          {
-            "Bearer": {
-            }
-          }
         ],
         "parameters": [
           {
@@ -284,21 +349,6 @@
                   "type": "string"
                 }
               }
-            },
-            "examples": {
-              "application/json": {
-                "user": {
-                  "id": 833,
-                  "email": "damiantremblay@nienow.io",
-                  "profile": {
-                    "id": 839,
-                    "first_name": "Cherlyn",
-                    "last_name": "Mayert"
-                  },
-                  "profile_type": "Consumer",
-                  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjI1NDk4ODIsInN1YiI6ODMzfQ.Z1O__MK2lcScTn2z2qNtc0D4VUxgS2tXkzSb2gT6lzY"
-                }
-              }
             }
           },
           "400": {
@@ -328,15 +378,6 @@
                 },
                 "profile_type": {
                   "type": "string"
-                }
-              }
-            },
-            "examples": {
-              "application/json": {
-                "errors": {
-                  "first_name": [
-                    "can't be blank"
-                  ]
                 }
               }
             }

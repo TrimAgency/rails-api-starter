@@ -3,13 +3,11 @@ class UsersController < ApplicationController
   load_and_authorize_resource except: :create
   skip_before_action :authenticate_user, only: :create
 
-  # TODO: Add spec for each action (show)
   def show
     render json: UserSerializer.render(@user, root: USER_ROOT, view: :show), 
            status: :ok
   end
 
-  # TODO: Add spec for each action (create)
   def create
     registration = UserRegistrationForm.new(create_params)
     registration.save!
@@ -18,7 +16,6 @@ class UsersController < ApplicationController
     render_created_user
   end
 
-  # TODO: Add spec for each action (update)
   def update
     @user.update!(update_params)
 
