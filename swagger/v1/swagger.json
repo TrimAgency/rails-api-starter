@@ -11,6 +11,9 @@
         "tags": [
           "Users"
         ],
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ],
@@ -30,7 +33,7 @@
         ],
         "responses": {
           "200": {
-            "description": "user found",
+            "description": "User found",
             "schema": {
               "type": "object",
               "properties": {
@@ -40,6 +43,20 @@
                 "email": {
                   "type": "string"
                 },
+                "profile": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "first_name": {
+                      "type": "string"
+                    },
+                    "last_name": {
+                      "type": "string"
+                    }
+                  }
+                },
                 "profile_type": {
                   "type": "string"
                 }
@@ -48,14 +65,278 @@
             "examples": {
               "application/json": {
                 "user": {
-                  "id": 56,
-                  "email": "rob_auer@example.com",
+                  "id": 810,
+                  "email": "carter@example.net",
                   "profile": {
-                    "id": 56,
-                    "first_name": "Hollis",
-                    "last_name": "Medhurst"
+                    "id": 816,
+                    "first_name": "Isela",
+                    "last_name": "Champlin"
                   },
                   "profile_type": "Consumer"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "examples": {
+              "application/json": {
+                "errors": "Couldn't find User with 'id'=invalid"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "examples": {
+              "application/json": {
+                "error": [
+                  "unauthorized"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Updates a user",
+        "tags": [
+          "Users"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": {
+            }
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "user",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "password_confirmation": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User updated",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "profile": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "first_name": {
+                      "type": "string"
+                    },
+                    "last_name": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "profile_type": {
+                  "type": "string"
+                }
+              }
+            },
+            "examples": {
+              "application/json": {
+                "user": {
+                  "id": 858,
+                  "email": "newemail@test.com",
+                  "profile": {
+                    "id": 866,
+                    "first_name": "Lashay",
+                    "last_name": "Morissette"
+                  },
+                  "profile_type": "Consumer"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "examples": {
+              "application/json": {
+                "error": [
+                  "unauthorized"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "summary": "Creates a user",
+        "tags": [
+          "Users"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": {
+            }
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "password_confirmation": {
+                  "type": "string"
+                },
+                "profile": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "first_name": {
+                      "type": "string"
+                    },
+                    "last_name": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "profile_type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "profile": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "first_name": {
+                      "type": "string"
+                    },
+                    "last_name": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "profile_type": {
+                  "type": "string"
+                }
+              }
+            },
+            "examples": {
+              "application/json": {
+                "user": {
+                  "id": 833,
+                  "email": "damiantremblay@nienow.io",
+                  "profile": {
+                    "id": 839,
+                    "first_name": "Cherlyn",
+                    "last_name": "Mayert"
+                  },
+                  "profile_type": "Consumer",
+                  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjI1NDk4ODIsInN1YiI6ODMzfQ.Z1O__MK2lcScTn2z2qNtc0D4VUxgS2tXkzSb2gT6lzY"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unable to create user",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "profile": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "first_name": {
+                      "type": "string"
+                    },
+                    "last_name": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "profile_type": {
+                  "type": "string"
+                }
+              }
+            },
+            "examples": {
+              "application/json": {
+                "errors": {
+                  "first_name": [
+                    "can't be blank"
+                  ]
                 }
               }
             }
