@@ -37,19 +37,7 @@ RSpec.describe UsersController, type: :request do
 
         response '200', 'User found' do
           let!(:Authorization) { auth_headers_for(user_one) }
-          schema type: :object,
-            properties: {
-              id: { type: :integer },
-              email: { type: :string },
-              profile: { type: :object, 
-                properties: {
-                  id: { type: :integer },
-                  first_name:{ type: :string },
-                  last_name: { type: :string },
-                }
-              },
-              profile_type: { type: :string }
-          }
+          schema '$ref' => '#/definitions/user'
           let!(:id) { user_one.id }
 
           it 'responds with 200 OK' do
@@ -161,19 +149,7 @@ RSpec.describe UsersController, type: :request do
         end
 
         response '201', 'User created' do
-          schema type: :object,
-            properties: {
-              id: { type: :integer },
-              email: { type: :string },
-              profile: { type: :object, 
-                properties: {
-                  id: { type: :integer },
-                  first_name:{ type: :string },
-                  last_name: { type: :string },
-                }
-              },
-              profile_type: { type: :string }
-          }
+          schema '$ref' => '#/definitions/user'
           let!(:user) { valid_params }
 
           it 'responds with 201 Created' do
@@ -194,19 +170,7 @@ RSpec.describe UsersController, type: :request do
         end
 
         response '400', 'Unable to create user' do
-          schema type: :object,
-            properties: {
-              id: { type: :integer },
-              email: { type: :string },
-              profile: { type: :object, 
-                properties: {
-                  id: { type: :integer },
-                  first_name:{ type: :string },
-                  last_name: { type: :string },
-                }
-              },
-              profile_type: { type: :string }
-          }
+          schema '$ref' => '#/definitions/user'
 
           context 'with missing user data' do
             let!(:user) { missing_params }
@@ -268,19 +232,7 @@ RSpec.describe UsersController, type: :request do
 
         response '200', 'User updated' do
           let!(:Authorization) { auth_headers_for(user_one) }
-          schema type: :object,
-            properties: {
-              id: { type: :integer },
-              email: { type: :string },
-              profile: { type: :object, 
-                properties: {
-                  id: { type: :integer },
-                  first_name:{ type: :string },
-                  last_name: { type: :string },
-                }
-              },
-              profile_type: { type: :string }
-          }
+          schema '$ref' => '#/definitions/user'
           let!(:id) { user_one.id }
           let!(:user) { update_params }
 

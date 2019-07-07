@@ -50,27 +50,27 @@
           "200": {
             "description": "Consumer updated",
             "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "integer"
-                },
-                "profile": {
-                  "type": "object",
-                  "properties": {
-                    "first_name": {
-                      "type": "string"
-                    },
-                    "last_name": {
-                      "type": "string"
-                    }
-                  }
+              "$ref": "#/definitions/consumer"
+            },
+            "examples": {
+              "application/json": {
+                "consumer": {
+                  "id": 736,
+                  "first_name": "Mary",
+                  "last_name": "Metz"
                 }
               }
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized",
+            "examples": {
+              "application/json": {
+                "error": [
+                  "unauthorized"
+                ]
+              }
+            }
           }
         }
       }
@@ -115,10 +115,22 @@
         ],
         "responses": {
           "201": {
-            "description": "Password reset created"
+            "description": "Password reset created",
+            "examples": {
+              "application/json": {
+                "password_reset": {
+                  "message": "password reset sent"
+                }
+              }
+            }
           },
           "404": {
-            "description": "User not found"
+            "description": "User not found",
+            "examples": {
+              "application/json": {
+                "errors": "Couldn't find User"
+              }
+            }
           }
         }
       }
@@ -153,39 +165,40 @@
           "200": {
             "description": "User found",
             "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "integer"
-                },
-                "email": {
-                  "type": "string"
-                },
-                "profile": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer"
-                    },
-                    "first_name": {
-                      "type": "string"
-                    },
-                    "last_name": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "profile_type": {
-                  "type": "string"
+              "$ref": "#/definitions/user"
+            },
+            "examples": {
+              "application/json": {
+                "user": {
+                  "id": 728,
+                  "email": "coleen_terry@example.net",
+                  "profile": {
+                    "id": 746,
+                    "first_name": "Tonia",
+                    "last_name": "Sawayn"
+                  },
+                  "profile_type": "Consumer"
                 }
               }
             }
           },
           "404": {
-            "description": "User not found"
+            "description": "User not found",
+            "examples": {
+              "application/json": {
+                "errors": "Couldn't find User with 'id'=invalid"
+              }
+            }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized",
+            "examples": {
+              "application/json": {
+                "error": [
+                  "unauthorized"
+                ]
+              }
+            }
           }
         }
       },
@@ -236,36 +249,32 @@
           "200": {
             "description": "User updated",
             "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "integer"
-                },
-                "email": {
-                  "type": "string"
-                },
-                "profile": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer"
-                    },
-                    "first_name": {
-                      "type": "string"
-                    },
-                    "last_name": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "profile_type": {
-                  "type": "string"
+              "$ref": "#/definitions/user"
+            },
+            "examples": {
+              "application/json": {
+                "user": {
+                  "id": 776,
+                  "email": "newemail@test.com",
+                  "profile": {
+                    "id": 796,
+                    "first_name": "Nelda",
+                    "last_name": "Dibbert"
+                  },
+                  "profile_type": "Consumer"
                 }
               }
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized",
+            "examples": {
+              "application/json": {
+                "error": [
+                  "unauthorized"
+                ]
+              }
+            }
           }
         }
       }
@@ -323,30 +332,20 @@
           "201": {
             "description": "User created",
             "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "integer"
-                },
-                "email": {
-                  "type": "string"
-                },
-                "profile": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer"
-                    },
-                    "first_name": {
-                      "type": "string"
-                    },
-                    "last_name": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "profile_type": {
-                  "type": "string"
+              "$ref": "#/definitions/user"
+            },
+            "examples": {
+              "application/json": {
+                "user": {
+                  "id": 751,
+                  "email": "alycia@flatley.org",
+                  "profile": {
+                    "id": 769,
+                    "first_name": "Katherine",
+                    "last_name": "Collier"
+                  },
+                  "profile_type": "Consumer",
+                  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjI1Njg2MzIsInN1YiI6NzUxfQ.fI_WrnNGxMmYNBJx5Fyqq9DEibgIK2cf0Jjh9Fwanso"
                 }
               }
             }
@@ -354,30 +353,14 @@
           "400": {
             "description": "Unable to create user",
             "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "integer"
-                },
-                "email": {
-                  "type": "string"
-                },
-                "profile": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer"
-                    },
-                    "first_name": {
-                      "type": "string"
-                    },
-                    "last_name": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "profile_type": {
-                  "type": "string"
+              "$ref": "#/definitions/user"
+            },
+            "examples": {
+              "application/json": {
+                "errors": {
+                  "first_name": [
+                    "can't be blank"
+                  ]
                 }
               }
             }
@@ -391,6 +374,47 @@
       "type": "apiKey",
       "name": "Authorization",
       "in": "header"
+    }
+  },
+  "definitions": {
+    "user": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "email": {
+          "type": "string"
+        },
+        "profile": {
+          "type": "object",
+          "properties": {
+            "first_name": {
+              "type": "string"
+            },
+            "last_name": {
+              "type": "string"
+            }
+          }
+        },
+        "profile_type": {
+          "type": "string"
+        }
+      }
+    },
+    "consumer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        }
+      }
     }
   }
 }

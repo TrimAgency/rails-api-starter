@@ -24,9 +24,9 @@ development:
   # Enable logging and documentation
   RAILS_LOG_TO_STDOUT: "enabled"
   REDIS_URL: "redis://redis:6379"
-  SWAGGER_DOCUMENTATION: "enabled"
   # STRIPE_PUBLISHABLE_KEY:
   # STRIPE_SECRET_KEY:
+  SWAGGER_DOCUMENTATION: "enabled"
 
 # staging:
 #   AWS_BUCKET: 

@@ -44,16 +44,8 @@ RSpec.describe ConsumersController, type: :request do
 
         response '200', 'Consumer updated' do
           let!(:Authorization) { auth_headers_for(user_one) }
-          schema type: :object,
-            properties: {
-              id: { type: :integer },
-              profile: { type: :object, 
-                properties: {
-                  first_name:{ type: :string },
-                  last_name: { type: :string }
-                }
-              }
-            }
+          schema '$ref' => '#/definitions/consumer'
+
           let!(:id) { user_one.profile.id }
           let!(:consumer) { update_params }
 

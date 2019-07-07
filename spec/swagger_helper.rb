@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.configure do |config|
+  include RswagDefinitions
   # Specify a root folder where Swagger JSON files are generated
   # NOTE: If you're using the rswag-api to serve API descriptions, you'll need
   # to ensure that it's configured to serve Swagger from the same folder
@@ -26,7 +27,8 @@ RSpec.configure do |config|
           name: 'Authorization',
           in: :header
         }
-      }
+      },
+      definitions: RswagDefinitions.model_schemas
     }
     # NOTE: Admin documentation json file if needed
     # 'v1/swagger_admin_doc.json' => {

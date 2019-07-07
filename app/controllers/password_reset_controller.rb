@@ -1,7 +1,6 @@
 class PasswordResetController < ApplicationController
   skip_before_action :authenticate_user, only: :create
 
-  # TODO: Add spec for this
   def create
     user = User.find_by_email!(password_reset_params[:email])
     user_id = user.id
