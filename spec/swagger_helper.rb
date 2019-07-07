@@ -16,7 +16,7 @@ RSpec.configure do |config|
     'v1/swagger.json' => {
       swagger: '2.0',
       info: {
-        title: 'API V1',
+        title: 'API Documentation for Rails Starter',
         version: 'v1'
       },
       paths: {},
@@ -28,5 +28,21 @@ RSpec.configure do |config|
         }
       }
     }
+    # NOTE: Admin documentation json file if needed
+    # 'v1/swagger_admin_doc.json' => {
+    #   swagger: '2.0',
+    #   info: {
+    #     title: 'API Documentation for Rails Starter Admins',
+    #     version: 'v1'
+    #   },
+    #   paths: {},
+    #   securityDefinitions: {
+    #     Bearer: {
+    #       type: :apiKey,
+    #       name: 'Authorization',
+    #       in: :header
+    #     }
+    #   }
+    # }
   }
 end

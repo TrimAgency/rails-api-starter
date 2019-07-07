@@ -8,5 +8,7 @@ if ENV["SWAGGER_DOCUMENTATION"].present?
     # then the list below should correspond to the relative paths for those endpoints
 
     c.swagger_endpoint '/api-docs/v1/swagger.json', 'API V1 Docs'
+    # NOTE: Endpoint for admin docs if needed
+    # c.swagger_endpoint '/api-docs/v1/swagger_admin_doc.json', 'API V1 Admin Docs'
   end
 end
