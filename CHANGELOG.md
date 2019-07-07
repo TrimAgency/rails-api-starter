@@ -8,6 +8,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 <!-- Note: Every project begins on version 0.1.0. Clear out the log below and start anew. Remove this message once completed. -->
 
+## [0.4.0] - 2019-07-06
+### Added
+- Updated requests specs to generate documentation with Swagger
+- Enable documentation in staging/develop with ENV
+- Adds RswagDocumentation module to read schemas outside of the swagger_helper config
+- Update ReadMe with Documentation section
+
+### Fixed
+- Small update in Dockerfile
+- Yarn security vulnerability
+- Missing enable delay for Sidekiq
+- Removes unneeded tables (Tags, Posts ,Taggable)
+
 ## [0.3.0] - 2019-05-21
 ### Added
 - Sample data for development
