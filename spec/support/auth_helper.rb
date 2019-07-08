@@ -4,15 +4,10 @@ module AuthHelper
   end
 
   def auth_headers_for(user)
-    {
-        'Content-Type' => 'application/json',
-        'Authorization' => "Bearer #{token_for(user)}"
-    }
+    "Bearer #{token_for(user)}"
   end
 
   def non_auth_headers
-    {
-        'Content-Type' => 'application/json'
-    }
+    "Bearer "
   end
 end

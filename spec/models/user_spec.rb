@@ -46,8 +46,6 @@ RSpec.describe User, type: :model do
     
     describe 'associations' do
       it { is_expected.to belong_to(:profile) }
-
-      it { is_expected.to have_many(:posts) }
     end
   end
 end

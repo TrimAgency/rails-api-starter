@@ -4,28 +4,53 @@ Project management can be found in [*Asana*](URL_HERE)
 
 ## Setup
 This is the start for all of our Ruby on Rails APIs.  
-- Clone this into the directory
-of your choice by appending the folder name to your git clone command.
 
-- cd into your directory and run $ `docker-compose build`
+1. Clone this into the directory of your choice by appending the folder name to your git clone command.
 
-- $ `docker-compose run app bash` - runs the shell
+2. `cd` into your directory and with an editor rename `sample-application.yml` in `/config` to 
+`application.yml` and add the appropriate ENVs.
 
-- $ `rake db:create db:migrate` - intitalizes the database
+3. Build the docker container and app with:
 
-- Rename the Rails app by:
+```
+$ docker-compose build
+```
+
+4. Start the app on `localhost:3000` with:
+
+```
+$ docker-compose up -d && docker attach rails-api-starter_app_1
+```
+
+Attaching to container allows for debugging with pry. The `-d` flag is 
+optional and runs containers in the background.
+
+5. Enter the app shell using:
+
+```
+$ docker-compose run app bash
+```
+
+6. Setup the databases:
+
+```
+# create database and run all migrations
+$ rake db:setup 
+
+# add sample data (optional)
+$ rake sample:all 
+```
+
+7. Rename the Rails app by:
     - Changing the module name in `config/application.rb`
     - Changing the database names in `config/database.yml`
+    - Changing the app name and other references from TRIM Starter to the new app name
 
-- In `/config` rename `sample-application.yml` to `application.yml` and add the appropriate ENV's
-
-- If image uploading capabilities are needed:
+8. If image uploading capabilities are needed:
     - Add AWS keys in `application.yml`
     - Uncomment fog configuration in `config/initializers/carrierwave.rb`
 
-- Change the app name and other references from TRIM Starter to the new app name
-
-- Update this README with the Asana URL. Remove setup notes marked with `NOTE:` in project.
+9. Update this README with the Asana URL. Remove setup notes marked with `NOTE:` in repo.
 
 ## Development
 
@@ -33,26 +58,58 @@ of your choice by appending the folder name to your git clone command.
 This app is dockerized solely for development environment normalization. Docker
 is not used for deployment to Heroku.
 
-* `docker-compose build` - build the containerized app
-* `docker-compose up` - start the app on localhost:3000
-
-### Docker Compose
-Prefix commands with `docker-compose run app` to run them against the application 
+You can prefix commands with `docker-compose run app` to run them against the application 
 container. For example:
 
-* `docker-compose run app rails console` - runs the rails console
-* `docker-compose run app bash` - runs the shell
+```
+# build the container
+$ docker-compose build 
 
-### Rspec
-* `docker-compose run app rspec` - run rpsec tests. Alternatively, open a bash
-  prompt (see above) and run `rspec`.
+# start the app
+$ docker-compose up 
 
-### Postgres
-* `docker-compose run app rake db:setup`
+# runs the rails console
+$ docker-compose run app rails console 
+
+# start the shell
+$ docker-compose run app bash 
+
+```
+You can run each command individually or alternatively open the shell where you can run the rails console, 
+rake commands, and testing from within it.
+
+### Testing
+To run the test suite you can use:
+
+```
+$ docker-compose run app rspec
+```
+
+Alternatively, open the shell (see above) and run `rspec`.
+
+### Documentation
+[Rwag](https://github.com/domaindrivendev/rswag) is used to generate documentation from our request specs. 
+
+In order to properly setup the documentation the ENV `SWAGGER_DOCUMENTATION` with the value `enabled` should be present in development or staging. Documentation should not be enabled in production.
+
+After request specs are created/updated in the required format, the documentation can be updated with:
+
+```
+$ rake rswag:specs:swaggerize
+```
+
+To avoid duplicate schemas throughout the specs, a yml file can be added in `support/definitions`. Navigate to `/api-docs` to see the documentation in development or staging.
 
 ### Debugging with Pry and Docker
-* `docker ps` - get the app container id
-* `docker attach container_id` - attach to container stdin/out using the id from the above step.
+If you start the server and attach to the container in the same command you can automatically use `binding.pry`
+for debugging.
+
+To confirm the app container id you can used `docker ps`. You can attach separately if running docker commands
+one by one. 
+
+```
+$ docker attach rails-api-starter_app_1
+```
 
 ### Workflow
 * The `develop` branch is used for development, submit PR requests to this branch, not `master`.  

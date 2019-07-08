@@ -21,16 +21,18 @@ development:
   # AWS_BUCKET: 
   CLIENT_ORIGIN: "http://localhost:4200"
   EMAIL_ORIGIN: "http://localhost:4200"
-  # Enable logging in development
+  # Enable logging and documentation
   RAILS_LOG_TO_STDOUT: "enabled"
   REDIS_URL: "redis://redis:6379"
   # STRIPE_PUBLISHABLE_KEY:
   # STRIPE_SECRET_KEY:
+  SWAGGER_DOCUMENTATION: "enabled"
 
 # staging:
 #   AWS_BUCKET: 
 #   CLIENT_ORIGIN:
 #   EMAIL_ORIGIN:
+#   SWAGGER_DOCUMENTATION: "enabled"
 #   STRIPE_PUBLISHABLE_KEY:
 #   STRIPE_SECRET_KEY:
 
@@ -38,6 +40,7 @@ development:
 #   AWS_BUCKET:
 #   CLIENT_ORIGIN:
 #   EMAIL_ORIGIN: 
+#   NO_SAMPLE_DATA: "enabled"
 #   STRIPE_PUBLISHABLE_KEY:
 #   STRIPE_SECRET_KEY:
 

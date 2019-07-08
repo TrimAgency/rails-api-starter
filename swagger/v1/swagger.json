@@ -1,0 +1,420 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API Documentation for Rails Starter",
+    "version": "v1"
+  },
+  "paths": {
+    "/consumers/{id}": {
+      "patch": {
+        "summary": "Updates a consumer",
+        "tags": [
+          "Consumers"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": {
+            }
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "consumer",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "first_name": {
+                  "type": "string"
+                },
+                "last_name": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consumer updated",
+            "schema": {
+              "$ref": "#/definitions/consumer"
+            },
+            "examples": {
+              "application/json": {
+                "consumer": {
+                  "id": 736,
+                  "first_name": "Mary",
+                  "last_name": "Metz"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "examples": {
+              "application/json": {
+                "error": [
+                  "unauthorized"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/password_reset": {
+      "post": {
+        "summary": "Creates password reset",
+        "tags": [
+          "Password Resets"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": {
+            }
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "password_reset",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Password reset created",
+            "examples": {
+              "application/json": {
+                "password_reset": {
+                  "message": "password reset sent"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "examples": {
+              "application/json": {
+                "errors": "Couldn't find User"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "summary": "Retrieves a user",
+        "tags": [
+          "Users"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": {
+            }
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User found",
+            "schema": {
+              "$ref": "#/definitions/user"
+            },
+            "examples": {
+              "application/json": {
+                "user": {
+                  "id": 728,
+                  "email": "coleen_terry@example.net",
+                  "profile": {
+                    "id": 746,
+                    "first_name": "Tonia",
+                    "last_name": "Sawayn"
+                  },
+                  "profile_type": "Consumer"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "examples": {
+              "application/json": {
+                "errors": "Couldn't find User with 'id'=invalid"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "examples": {
+              "application/json": {
+                "error": [
+                  "unauthorized"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Updates a user",
+        "tags": [
+          "Users"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": {
+            }
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "user",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "password_confirmation": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User updated",
+            "schema": {
+              "$ref": "#/definitions/user"
+            },
+            "examples": {
+              "application/json": {
+                "user": {
+                  "id": 776,
+                  "email": "newemail@test.com",
+                  "profile": {
+                    "id": 796,
+                    "first_name": "Nelda",
+                    "last_name": "Dibbert"
+                  },
+                  "profile_type": "Consumer"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "examples": {
+              "application/json": {
+                "error": [
+                  "unauthorized"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "summary": "Creates a user",
+        "tags": [
+          "Users"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "password_confirmation": {
+                  "type": "string"
+                },
+                "profile": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "first_name": {
+                      "type": "string"
+                    },
+                    "last_name": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "profile_type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User created",
+            "schema": {
+              "$ref": "#/definitions/user"
+            },
+            "examples": {
+              "application/json": {
+                "user": {
+                  "id": 751,
+                  "email": "alycia@flatley.org",
+                  "profile": {
+                    "id": 769,
+                    "first_name": "Katherine",
+                    "last_name": "Collier"
+                  },
+                  "profile_type": "Consumer",
+                  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjI1Njg2MzIsInN1YiI6NzUxfQ.fI_WrnNGxMmYNBJx5Fyqq9DEibgIK2cf0Jjh9Fwanso"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unable to create user",
+            "schema": {
+              "$ref": "#/definitions/user"
+            },
+            "examples": {
+              "application/json": {
+                "errors": {
+                  "first_name": [
+                    "can't be blank"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "user": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "email": {
+          "type": "string"
+        },
+        "profile": {
+          "type": "object",
+          "properties": {
+            "first_name": {
+              "type": "string"
+            },
+            "last_name": {
+              "type": "string"
+            }
+          }
+        },
+        "profile_type": {
+          "type": "string"
+        }
+      }
+    },
+    "consumer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -22,6 +22,7 @@ gem 'puma', '~> 3.7'
 gem 'rack-cors'
 gem 'rails', '~> 5.2'
 gem 'sidekiq'
+gem 'rswag'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -37,6 +38,7 @@ group :development, :test do
   # Create an erd pdf for reference
   gem 'rails-erd'
   gem 'rspec-rails'
+  gem 'rswag-specs'
 end
 
 group :development do

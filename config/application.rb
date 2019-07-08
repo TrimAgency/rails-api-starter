@@ -16,6 +16,11 @@ require "action_cable/engine"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# Allows auto-generated examples in swagger docs
+RSpec.configure do |config|
+  config.swagger_dry_run = false
+end
+
 module TrimStarter
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
