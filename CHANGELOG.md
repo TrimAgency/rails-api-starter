@@ -10,7 +10,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.4.1] - 2019-07-08
 ### Fixed
-- Fixes schema validation for swagger security requirements
+- Fixes Swagger schema validation for swagger security requirements
+- Fixes Swagger dependencies on staging + production environments
 
 ## [0.4.0] - 2019-07-06
 ### Added

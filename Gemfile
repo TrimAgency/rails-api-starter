@@ -1,18 +1,19 @@
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
 end
-
 
 gem 'bcrypt'
 gem 'blueprinter', '~> 0.16.0'
 gem 'cancancan'
 gem 'carrierwave'
 gem 'carrierwave-base64'
+gem 'factory_bot_rails'
+gem 'faker'
 gem 'figaro'
-gem "fog-aws"
+gem 'fog-aws'
 gem 'jwt'
 gem 'knock'
 gem 'mandrill-api'
@@ -21,24 +22,23 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.7'
 gem 'rack-cors'
 gem 'rails', '~> 5.2'
-gem 'sidekiq'
+gem 'rspec-rails'
 gem 'rswag'
+gem 'rswag-specs'
+gem 'sidekiq'
 
 group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'faker'
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry'
   gem 'pry-byebug'
   gem 'pry-clipboard'
   gem 'pry-doc'
   gem 'pry-docmore'
+  gem 'pry-rails'
   gem 'pry-rescue'
   gem 'pry-stack_explorer'
-  gem 'pry-rails'
   # Create an erd pdf for reference
   gem 'rails-erd'
-  gem 'rspec-rails'
-  gem 'rswag-specs'
 end
 
 group :development do
@@ -49,7 +49,6 @@ group :development do
 end
 
 group :test do
-  gem 'factory_bot_rails'
   gem 'json_matchers'
   gem 'rspec'
   gem 'rspec-json_expectations'
@@ -58,4 +57,4 @@ group :test do
   gem 'webmock'
 end
 
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
