@@ -3,8 +3,8 @@ require 'swagger_helper'
 
 RSpec.describe ConsumersController, type: :request do
   include AuthHelper
-  CONSUMER_ROOT='consumer'.freeze
-  CONSUMER_TAG='Consumers'.freeze
+  CONSUMER_ROOT = 'consumer'.freeze
+  CONSUMER_TAG = 'Consumers'.freeze
 
   describe 'Consumers API', swagger_doc: 'v1/swagger.json' do
     let!(:user_one) { create(:user, :consumer_user) }
@@ -19,7 +19,7 @@ RSpec.describe ConsumersController, type: :request do
     after(:each) do |example|
       # Swagger only allows one response block per status code, skip extra tests if needed
       unless example.metadata[:skip_swagger]
-        example.metadata[:response][:examples] = 
+        example.metadata[:response][:examples] =
           { 'application/json' => JSON.parse(response.body, symbolize_names: true) }
       end
     end
@@ -30,7 +30,7 @@ RSpec.describe ConsumersController, type: :request do
         tags CONSUMER_TAG
         consumes 'application/json'
         produces 'application/json'
-        security [ Bearer: {} ]
+        security [Bearer: []]
         parameter name: :id, in: :path, type: :string
         parameter name: :consumer, in: :body, schema: {
           type: :object,
@@ -52,11 +52,11 @@ RSpec.describe ConsumersController, type: :request do
           it 'responds with 200 OK' do
             expect(response).to have_http_status :ok
           end
-          
+
           it 'updates the record' do
             expect(User.find(user_one.id).profile.first_name).to eql 'Mary'
           end
-          
+
           it 'returns expected attributes in valid JSON' do
             user = User.find(user_one.id)
             expect(response.body).to eql(
