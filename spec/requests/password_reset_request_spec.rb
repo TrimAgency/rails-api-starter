@@ -3,7 +3,7 @@ require 'swagger_helper'
 
 RSpec.describe ConsumersController, type: :request do
   include AuthHelper
-  PW_TAG='Password Resets'.freeze
+  PW_TAG = 'Password Resets'.freeze
 
   describe 'Password Reset API', swagger_doc: 'v1/swagger.json' do
     let!(:user_one) { create(:user, :consumer_user) }
@@ -17,7 +17,7 @@ RSpec.describe ConsumersController, type: :request do
     after(:each) do |example|
       # Swagger only allows one response block per status code, skip extra tests if needed
       unless example.metadata[:skip_swagger]
-        example.metadata[:response][:examples] = 
+        example.metadata[:response][:examples] =
           { 'application/json' => JSON.parse(response.body, symbolize_names: true) }
       end
     end
@@ -28,7 +28,7 @@ RSpec.describe ConsumersController, type: :request do
         tags PW_TAG
         consumes 'application/json'
         produces 'application/json'
-        security [ Bearer: {} ]
+        security [Bearer: []]
         parameter name: :id, in: :path, type: :string
         parameter name: :password_reset, in: :body, schema: {
           type: :object,
@@ -48,13 +48,12 @@ RSpec.describe ConsumersController, type: :request do
           it 'responds with 201 Created' do
             expect(response).to have_http_status :created
           end
-          
+
           it 'returns expected attributes in valid JSON', :skip_swagger do
             expect(response.body).to eql(
               { password_reset: {
-                  message: 'password reset sent'
-                }
-              }.to_json
+                message: 'password reset sent'
+              } }.to_json
             )
           end
         end

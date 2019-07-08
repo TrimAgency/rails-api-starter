@@ -4,13 +4,13 @@ require 'swagger_helper'
 # NOTE: Extra comments added here for reference
 RSpec.describe UsersController, type: :request do
   include AuthHelper
-  USER_ROOT='user'.freeze
-  USER_TAG='Users'.freeze
+  USER_ROOT = 'user'.freeze
+  USER_TAG = 'Users'.freeze
 
   describe 'Users API', swagger_doc: 'v1/swagger.json' do
     let!(:user_one) { create(:user, :consumer_user) }
     let!(:user_two) { create(:user, :consumer_user) }
-    let!(:taken_email) { create(:user, :consumer_user, email: 'test@test.com')  }
+    let!(:taken_email) { create(:user, :consumer_user, email: 'test@test.com') }
 
     # Run swagger tests using it blocks
     before(:each) do |example|
@@ -21,7 +21,7 @@ RSpec.describe UsersController, type: :request do
     after(:each) do |example|
       # Swagger only allows one response block per status code, skip extra tests if needed
       unless example.metadata[:skip_swagger]
-        example.metadata[:response][:examples] = 
+        example.metadata[:response][:examples] =
           { 'application/json' => JSON.parse(response.body, symbolize_names: true) }
       end
     end
@@ -32,7 +32,7 @@ RSpec.describe UsersController, type: :request do
         tags USER_TAG
         consumes 'application/json'
         produces 'application/json'
-        security [ Bearer: {} ]
+        security [Bearer: []]
         parameter name: :id, in: :path, type: :string
 
         response '200', 'User found' do
@@ -73,12 +73,12 @@ RSpec.describe UsersController, type: :request do
           context 'when logged out' do
             let!(:Authorization) { non_auth_headers }
             let!(:id) { user_one.id }
-  
+
             it 'responds with 401 unauthorized', :skip_swagger do
               expect(response).to have_http_status :unauthorized
             end
           end
-        end  
+        end
       end
     end
 
@@ -94,13 +94,12 @@ RSpec.describe UsersController, type: :request do
             email: { type: :string },
             password: { type: :string },
             password_confirmation: { type: :string },
-            profile: { type: :object, 
-              properties: {
-                id: { type: :integer },
-                first_name:{ type: :string },
-                last_name: { type: :string },
-              }
-            },
+            profile: { type: :object,
+                       properties: {
+                         id: { type: :integer },
+                         first_name: { type: :string },
+                         last_name: { type: :string }
+                       } },
             profile_type: { type: :string }
           }
         }
@@ -111,18 +110,18 @@ RSpec.describe UsersController, type: :request do
             password_confirmation: '123123123',
             profile_type: 'consumer',
             profile: {
-                first_name: Faker::Name.first_name,
-                last_name: Faker::Name.last_name
+              first_name: Faker::Name.first_name,
+              last_name: Faker::Name.last_name
             } }
         end
-        
+
         let!(:missing_params) do
           { email: Faker::Internet.email,
             password: '123123123',
             password_confirmation: '123123123',
             profile_type: 'consumer',
             profile: {
-                last_name: Faker::Name.last_name
+              last_name: Faker::Name.last_name
             } }
         end
 
@@ -132,19 +131,19 @@ RSpec.describe UsersController, type: :request do
             password_confirmation: '123123123',
             profile_type: 'consumer',
             profile: {
-                first_name: Faker::Name.first_name,
-                last_name: Faker::Name.last_name
-          } }
+              first_name: Faker::Name.first_name,
+              last_name: Faker::Name.last_name
+            } }
         end
-        
+
         let!(:invalid_params) do
           { email: 'not@good',
             password: '123123123',
             password_confirmation: '123123123',
             profile_type: 'consumer',
             profile: {
-                first_name: Faker::Name.first_name,
-                last_name: Faker::Name.last_name
+              first_name: Faker::Name.first_name,
+              last_name: Faker::Name.last_name
             } }
         end
 
@@ -162,10 +161,10 @@ RSpec.describe UsersController, type: :request do
 
           it 'returns expected attributes in valid JSON' do
             token = JSON.parse(response.body)['user']['token']
-            expect(response.body).to include UserSerializer.render(User.last, 
-                                                                  root: USER_ROOT,
-                                                                  view: :create, 
-                                                                  token: token)
+            expect(response.body).to include UserSerializer.render(User.last,
+                                                                   root: USER_ROOT,
+                                                                   view: :create,
+                                                                   token: token)
           end
         end
 
@@ -178,7 +177,7 @@ RSpec.describe UsersController, type: :request do
             it 'responds with 400 Bad Request' do
               expect(response).to have_http_status :bad_request
             end
-    
+
             it 'responds with errors' do
               expect(response.body).to include 'errors', 'first_name'
             end
@@ -190,7 +189,7 @@ RSpec.describe UsersController, type: :request do
             it 'responds with 400 Bad Request', :skip_swagger do
               expect(response).to have_http_status :bad_request
             end
-    
+
             it 'responds with errors', :skip_swagger do
               expect(response.body).to include 'errors', 'email'
             end
@@ -202,7 +201,7 @@ RSpec.describe UsersController, type: :request do
             it 'responds with 400 Bad Request', :skip_swagger do
               expect(response).to have_http_status :bad_request
             end
-    
+
             it 'responds with errors', :skip_swagger do
               expect(response.body).to include 'errors', 'email'
             end
@@ -217,7 +216,7 @@ RSpec.describe UsersController, type: :request do
         tags USER_TAG
         consumes 'application/json'
         produces 'application/json'
-        security [ Bearer: {} ]
+        security [Bearer: []]
         parameter name: :id, in: :path, type: :string
         parameter name: :user, in: :body, schema: {
           type: :object,
@@ -239,11 +238,11 @@ RSpec.describe UsersController, type: :request do
           it 'responds with 200 OK' do
             expect(response).to have_http_status :ok
           end
-          
+
           it 'updates the record' do
             expect(User.find(user_one.id).email).to eql 'newemail@test.com'
           end
-          
+
           it 'returns expected attributes in valid JSON' do
             user = User.find(user_one.id)
             expect(response.body).to eql(
