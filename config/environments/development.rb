@@ -18,7 +18,7 @@ Rails.application.configure do
 
     config.cache_store = :memory_store
     config.public_file_server.headers = {
-      'Cache-Control' => "public, max-age=#{2.days.seconds.to_i}"
+      'Cache-Control' => "public, max-age=#{2.days.to_i}"
     }
   else
     config.action_controller.perform_caching = false
@@ -31,11 +31,25 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  # Mandrill configuration
+  config.action_mailer.smtp_settings = {
+    address: ENV['SMTP_ADDRESS'],
+    authentication: :plain,
+    domain: ENV['SMTP_DOMAIN'],
+    enable_starttls_auto: true,
+    password: ENV['SMTP_PASSWORD'],
+    port: '587',
+    user_name: ENV['SMTP_USERNAME']
+  }
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
+
+  # Highlight code that triggered database queries in logs.
+  config.active_record.verbose_query_logs = true
 
   # Logs now present in docker container for development
   # Use default logging formatter so that PID and timestamp are not suppressed.
@@ -46,7 +60,6 @@ Rails.application.configure do
     logger.formatter = config.log_formatter
     config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
-
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
