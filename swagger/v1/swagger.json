@@ -5,7 +5,7 @@
     "version": "v1"
   },
   "paths": {
-    "/consumers/{id}": {
+    "/api/v1/consumers/{id}": {
       "patch": {
         "summary": "Updates a consumer",
         "tags": [
@@ -19,8 +19,9 @@
         ],
         "security": [
           {
-            "Bearer": {
-            }
+            "Bearer": [
+
+            ]
           }
         ],
         "parameters": [
@@ -42,6 +43,9 @@
                 "last_name": {
                   "type": "string"
                 }
+              },
+              "example": {
+                "first_name": "Mary"
               }
             }
           }
@@ -55,9 +59,9 @@
             "examples": {
               "application/json": {
                 "consumer": {
-                  "id": 736,
+                  "id": 1,
                   "first_name": "Mary",
-                  "last_name": "Metz"
+                  "last_name": "Dietrich"
                 }
               }
             }
@@ -75,12 +79,13 @@
         }
       }
     },
-    "/password_reset": {
+    "/api/v1/password_reset": {
       "post": {
         "summary": "Creates password reset",
         "tags": [
           "Password Resets"
         ],
+        "description": "\n The password reset endpoint sends an email with a link for users to update their password.                      The password update view is in the API and does not need to be created in the front-end apps.",
         "consumes": [
           "application/json"
         ],
@@ -89,8 +94,9 @@
         ],
         "security": [
           {
-            "Bearer": {
-            }
+            "Bearer": [
+
+            ]
           }
         ],
         "parameters": [
@@ -109,6 +115,9 @@
                 "email": {
                   "type": "string"
                 }
+              },
+              "example": {
+                "email": "claudia@example.com"
               }
             }
           }
@@ -135,7 +144,7 @@
         }
       }
     },
-    "/users/{id}": {
+    "/api/v1/users/{id}": {
       "get": {
         "summary": "Retrieves a user",
         "tags": [
@@ -149,8 +158,9 @@
         ],
         "security": [
           {
-            "Bearer": {
-            }
+            "Bearer": [
+
+            ]
           }
         ],
         "parameters": [
@@ -170,12 +180,12 @@
             "examples": {
               "application/json": {
                 "user": {
-                  "id": 728,
-                  "email": "coleen_terry@example.net",
+                  "id": 15,
+                  "email": "markus_rodriguez@example.com",
                   "profile": {
-                    "id": 746,
-                    "first_name": "Tonia",
-                    "last_name": "Sawayn"
+                    "id": 15,
+                    "first_name": "Larissa",
+                    "last_name": "Hahn"
                   },
                   "profile_type": "Consumer"
                 }
@@ -215,8 +225,9 @@
         ],
         "security": [
           {
-            "Bearer": {
-            }
+            "Bearer": [
+
+            ]
           }
         ],
         "parameters": [
@@ -241,6 +252,9 @@
                 "password_confirmation": {
                   "type": "string"
                 }
+              },
+              "example": {
+                "email": "newemail@test.com"
               }
             }
           }
@@ -254,12 +268,12 @@
             "examples": {
               "application/json": {
                 "user": {
-                  "id": 776,
+                  "id": 57,
                   "email": "newemail@test.com",
                   "profile": {
-                    "id": 796,
-                    "first_name": "Nelda",
-                    "last_name": "Dibbert"
+                    "id": 59,
+                    "first_name": "Donnell",
+                    "last_name": "Bogisich"
                   },
                   "profile_type": "Consumer"
                 }
@@ -279,7 +293,7 @@
         }
       }
     },
-    "/users": {
+    "/api/v1/users": {
       "post": {
         "summary": "Creates a user",
         "tags": [
@@ -324,6 +338,16 @@
                 "profile_type": {
                   "type": "string"
                 }
+              },
+              "example": {
+                "email": "scottie@kunzewest.net",
+                "password": "123123123",
+                "password_confirmation": "123123123",
+                "profile_type": "consumer",
+                "profile": {
+                  "first_name": "Sarita",
+                  "last_name": "Blick"
+                }
               }
             }
           }
@@ -337,15 +361,15 @@
             "examples": {
               "application/json": {
                 "user": {
-                  "id": 751,
-                  "email": "alycia@flatley.org",
+                  "id": 27,
+                  "email": "scottie@kunzewest.net",
                   "profile": {
-                    "id": 769,
-                    "first_name": "Katherine",
-                    "last_name": "Collier"
+                    "id": 27,
+                    "first_name": "Sarita",
+                    "last_name": "Blick"
                   },
                   "profile_type": "Consumer",
-                  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjI1Njg2MzIsInN1YiI6NzUxfQ.fI_WrnNGxMmYNBJx5Fyqq9DEibgIK2cf0Jjh9Fwanso"
+                  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjY2NjgyOTMsInN1YiI6Mjd9.zkY4As9Pk6svnIrFkBShipkpuveE1AEuBwite8cTgBQ"
                 }
               }
             }
@@ -364,6 +388,64 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/v1/user_token": {
+      "post": {
+        "summary": "Creates user token",
+        "tags": [
+          "Logins"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              },
+              "example": {
+                "email": "loise@example.com",
+                "password": "password"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User token created. User logged in.",
+            "examples": {
+              "application/json": {
+                "user": {
+                  "id": 69,
+                  "email": "loise@example.com",
+                  "profile": {
+                    "id": 71,
+                    "first_name": "Carroll",
+                    "last_name": "Trantow"
+                  },
+                  "profile_type": "Consumer",
+                  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjY2NjgyOTUsInN1YiI6Njl9.VUOqMGIAwBSrOsRdY9TOLZKBQRTkFUJDdPhECFaGdtg"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
           }
         }
       }
@@ -386,19 +468,11 @@
         "email": {
           "type": "string"
         },
-        "profile": {
-          "type": "object",
-          "properties": {
-            "first_name": {
-              "type": "string"
-            },
-            "last_name": {
-              "type": "string"
-            }
-          }
-        },
         "profile_type": {
           "type": "string"
+        },
+        "profile": {
+          "$ref": "#/definitions/consumer"
         }
       }
     },

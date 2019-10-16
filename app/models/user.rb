@@ -2,7 +2,6 @@ class User < ApplicationRecord
   has_secure_password
 
   belongs_to :profile, polymorphic: true, dependent: :destroy
-  has_many :posts, dependent: :destroy
 
   validates :email,
             uniqueness: { case_sensitive: false },
@@ -30,6 +29,11 @@ class User < ApplicationRecord
   # Use user.ability.can? to run authorization checks in forms
   def ability
     Ability.new(self)
+  end
+
+  # Get user id from jwt token
+  def self.from_token_payload(payload)
+    find(payload.symbolize_keys[:sub])
   end
 
   # NOTE: Authorization example - Remove for new projects

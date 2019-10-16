@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'swagger_helper'
 
-RSpec.describe ConsumersController, type: :request do
+RSpec.describe Api::V1::ConsumersController, type: :request do
   include AuthHelper
   CONSUMER_ROOT = 'consumer'.freeze
   CONSUMER_TAG = 'Consumers'.freeze
@@ -10,22 +10,8 @@ RSpec.describe ConsumersController, type: :request do
     let!(:user_one) { create(:user, :consumer_user) }
     let!(:user_two) { create(:user, :consumer_user) }
 
-    # Run swagger tests using it blocks
-    before(:each) do |example|
-      submit_request(example.metadata)
-    end
-
-    # Build response examples
-    after(:each) do |example|
-      # Swagger only allows one response block per status code, skip extra tests if needed
-      unless example.metadata[:skip_swagger]
-        example.metadata[:response][:examples] =
-          { 'application/json' => JSON.parse(response.body, symbolize_names: true) }
-      end
-    end
-
     # UPDATE
-    path '/consumers/{id}' do
+    path '/api/v1/consumers/{id}' do
       patch 'Updates a consumer' do
         tags CONSUMER_TAG
         consumes 'application/json'
@@ -49,15 +35,15 @@ RSpec.describe ConsumersController, type: :request do
           let!(:id) { user_one.profile.id }
           let!(:consumer) { update_params }
 
-          it 'responds with 200 OK' do
+          it 'responds with 200 OK', request_example: :consumer do
             expect(response).to have_http_status :ok
           end
 
-          it 'updates the record' do
+          it 'updates the record', :skip_swagger do
             expect(User.find(user_one.id).profile.first_name).to eql 'Mary'
           end
 
-          it 'returns expected attributes in valid JSON' do
+          it 'returns expected attributes in valid JSON', :skip_swagger do
             user = User.find(user_one.id)
             expect(response.body).to eql(
               ConsumerSerializer.render(user.profile, root: CONSUMER_ROOT)

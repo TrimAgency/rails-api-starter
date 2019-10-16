@@ -4,8 +4,14 @@ Rails.application.routes.draw do
     mount Rswag::Ui::Engine => '/api-docs'
   end
 
-  resources :consumers, only: [:update]
-  resource  :password_reset, only: [:create], controller: :password_reset
-  resources :users, only: [:create, :update, :show, :index]
-  resource  :user_token, only: [:create], controller: :user_token
+  namespace :api do
+    namespace :v1 do
+      resources :consumers, only: [:update]
+      resource  :password_reset, only: [:create], controller: :password_reset
+      resources :users, only: [:create, :update, :show]
+      resource  :user_token, only: [:create], controller: :user_token
+    end
+  end
+
+  resources :passwords, only: [:edit, :update]
 end

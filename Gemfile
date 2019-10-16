@@ -1,9 +1,7 @@
 source 'https://rubygems.org'
 
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
-  "https://github.com/#{repo_name}.git"
-end
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+ruby '2.5.1'
 
 gem 'bcrypt'
 gem 'blueprinter', '~> 0.16.0'
@@ -26,6 +24,7 @@ gem 'rspec-rails'
 gem 'rswag'
 gem 'rswag-specs'
 gem 'sidekiq'
+gem 'sprockets', '~> 3.7.2'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

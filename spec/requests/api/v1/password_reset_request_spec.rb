@@ -1,31 +1,19 @@
 require 'rails_helper'
 require 'swagger_helper'
 
-RSpec.describe ConsumersController, type: :request do
+RSpec.describe Api::V1::PasswordResetController, type: :request do
   include AuthHelper
   PW_TAG = 'Password Resets'.freeze
 
   describe 'Password Reset API', swagger_doc: 'v1/swagger.json' do
     let!(:user_one) { create(:user, :consumer_user) }
 
-    # Run swagger tests using it blocks
-    before(:each) do |example|
-      submit_request(example.metadata)
-    end
-
-    # Build response examples
-    after(:each) do |example|
-      # Swagger only allows one response block per status code, skip extra tests if needed
-      unless example.metadata[:skip_swagger]
-        example.metadata[:response][:examples] =
-          { 'application/json' => JSON.parse(response.body, symbolize_names: true) }
-      end
-    end
-
     # CREATE
-    path '/password_reset' do
+    path '/api/v1/password_reset' do
       post 'Creates password reset' do
         tags PW_TAG
+        description "\n The password reset endpoint sends an email with a link for users to update their password. \
+                     The password update view is in the API and does not need to be created in the front-end apps."
         consumes 'application/json'
         produces 'application/json'
         security [Bearer: []]
@@ -45,7 +33,7 @@ RSpec.describe ConsumersController, type: :request do
           let!(:id) { user_one.id }
           let!(:password_reset) { reset_params }
 
-          it 'responds with 201 Created' do
+          it 'responds with 201 Created', request_example: :password_reset do
             expect(response).to have_http_status :created
           end
 

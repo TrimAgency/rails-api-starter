@@ -5,12 +5,7 @@ user:
       type: integer
     email:
       type: string
-    profile:
-      type: object
-      properties: 
-        first_name:
-          type: string
-        last_name: 
-          type: string
     profile_type:
-       type: string
+      type: string
+    profile:
+      $ref: "#/definitions/consumer"

@@ -29,6 +29,26 @@ RSpec.configure do |config|
     Sidekiq::Worker.clear_all
   end
 
+  config.before :each, type: :request do |example|
+    submit_request(example.metadata)
+  end
+
+  config.after :each, type: :request do |example|
+    # Swagger only allows one response block per status code, skip extra tests if needed
+    unless example.metadata[:skip_swagger] || response.body.blank?
+      # Sets response example
+      example.metadata[:response][:examples] =
+        { 'application/json' => JSON.parse(response.body, symbolize_names: true) }
+    end
+
+    # Sets request example
+    if example.metadata[:request_example] && !example.metadata[:skip_swagger]
+      request_example_name = example.metadata[:request_example]
+      param = example.metadata[:operation][:parameters].detect { |p| p[:name] == request_example_name }
+      param[:schema][:example] = 
+        send(request_example_name)[request_example_name] || send(request_example_name)
+    end
+  end
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.
